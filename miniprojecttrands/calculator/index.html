@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto Condensed"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="calculator">
+      <input type="text" id="Display" readonly />
+      <div id="btn">
+        <button onclick="appendToDisplay('+')" class="operators">+</button>
+        <button onclick="appendToDisplay('7')" class="number">7</button>
+        <button onclick="appendToDisplay('8')" class="number">8</button>
+        <button onclick="appendToDisplay('9')" class="number">9</button>
+        <button onclick="appendToDisplay('-')" class="operators">-</button>
+        <button onclick="appendToDisplay('4')" class="number">4</button>
+        <button onclick="appendToDisplay('5')" class="number">5</button>
+        <button onclick="appendToDisplay('6')" class="number">6</button>
+        <button onclick="appendToDisplay('*')" class="operators">*</button>
+        <button onclick="appendToDisplay('1')" class="number">1</button>
+        <button onclick="appendToDisplay('2')" class="number">2</button>
+        <button onclick="appendToDisplay('3')" class="number">3</button>
+        <button onclick="appendToDisplay('/')" class="operators">/</button>
+        <button onclick="appendToDisplay('0')" class="number">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button onclick="calculate()" class="calculate">=</button>
+        <button onclick="clearDisplay()">C</button>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/home.js"></script>
+  </body>
+</html>
