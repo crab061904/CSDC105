@@ -11,11 +11,10 @@ app.use('/',pageRoutes)
 
 //404 handler
 app.use((req,res)=>{ 
-    res.status(404).sendFile(path.json(__dirname,'view','404.html'))
+    res.status(404).sendFile(path.join(__dirname,'view','404.html'))
 })
 
 //server start
 app.listen(PORT,()=>{ 
     console.log(`Server running on http://localhost:${PORT}`)
 })
-
