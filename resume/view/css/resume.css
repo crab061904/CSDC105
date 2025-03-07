@@ -61,3 +61,22 @@ body{
     background-color: #5a2dab !important; 
     border-color: #5a2dab !important;
 }
+
+
+
+.main{
+    display: inline-flex;
+    background-color: #5a2dab;
+    width: 100vw;
+    height: 100vh;
+}
+
+.left{
+width: 50%;
+background-color: aqua;
+}
+.right{
+    width: 50%;
+
+    background-color: antiquewhite;
+}
