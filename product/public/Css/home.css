@@ -151,10 +151,10 @@ input{
   font-size: 1.5rem;
 }
 
-textarea{
+#markdown{
     width: 40vw;
     height:40vh ;
-    font-size: 1.5rem;
+   
 }
 
 .semiTitle{
@@ -165,11 +165,9 @@ form{
     margin-top: 2%;
     background-color: #8080FF;
     width: 50%;
-    padding-bottom: 2%;
-    padding-top:2% ;
+    padding:5%;
     display: flex;
     justify-content: center;
-    align-items: center; /* Centers content vertically */
     flex-direction: column;
     color: white;
     border-radius: 20px;
@@ -182,17 +180,19 @@ form{
   font-weight: bold;
   margin-bottom: 1%;
 }
-button{
-    background-color: #50FA6D;
-    font-size: 1.5rem;
+.btn{
     border:none;
-    
-    color: black;
-    font-weight: bold;
-    padding: 10%;
-    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 10px;
+    margin: 2%;
+ 
 }
-
+.btnspace{
+    display: inline-flex;
+    align-content: center;
+    justify-content: center;
+}
 button:hover{
     color:white;
 }
