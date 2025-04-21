@@ -36,8 +36,8 @@
 
     </nav>
     <div class="create-blog-content">
-        <form class="forms" action="/articles" method="POST">
-            <div class="title-page">Create Blog</div>
+        <form class="forms" action="/articles/<%=article.id%>?_method=PUT" method="POST">
+            <div class="title-page">Edit Blog</div>
             <%- include('_form_feilds') %>
             
         </form>

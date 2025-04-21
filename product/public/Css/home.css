@@ -11,6 +11,7 @@ nav{
     display: inline-flex;
     background-color: #8080FF;
     width: 100%;
+    padding: 1%;
 }
 .site-title{
     margin-left: 1%;
@@ -53,7 +54,7 @@ nav{
 }
 #new .box {
     width: 2.5vw; 
-    height: 2.5vw; 
+    height: 2vw; 
     background-color: #50FA6D;
     display: flex;
     justify-content: center;
@@ -62,6 +63,7 @@ nav{
 }
 #new .label {
     font-size: .8vw; 
+    
     color:#8080FF;
 }
 #new a {
@@ -161,7 +163,7 @@ input{
     font-size: 1.5rem;
 }
 
-form{
+.forms{
     margin-top: 2%;
     background-color: #8080FF;
     width: 50%;

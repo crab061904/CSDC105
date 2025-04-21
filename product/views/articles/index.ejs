@@ -32,14 +32,18 @@
 <div class="containers">
 <div class="Container">
     <div class="title-page">Blogs</div>
-    <% if (blogs.length > 0) { %>
-        <% blogs.forEach(blog => { %>
+    <% if (articles.length > 0) { %>
+        <% articles.forEach(article => { %>
             <div class="boxes mt-4">
             <div class="card-body">
-            <h3 class="title"> <%= blog.title %> </h3>
-            <div class="card-subtitle text-muted mb-2"><%= blog.createdAt.toLocaleDateString() %></div>
-            <p class="snippet mb-2"> <%= blog.snippet %> </p>
-            </div>
+            <h3 class="title"> <%= article.title %> </h3>
+            <div class="card-subtitle text-muted mb-2"><%=article.createdAt.toLocaleDateString() %></div>
+            <p class="snippet mb-2"> <%= article.description %> </p>
+            <a href="/articles/<%= article.slug %>" class="btn btn-primary" style="margin: 0%;">Read more</a>
+             <form action="/articles/<%=article.id%>?_method=DELETE" method="POST" class="d-inline"  >
+                <button type="submit" class="btn btn-danger" style="margin:0%;">Delete</button>
+             </form>
+        </div>
             </div>
         <% }); %>
     <% } else { %>

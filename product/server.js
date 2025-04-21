@@ -3,13 +3,14 @@ const express=require("express")
 const app =express()
 const mongoose=require('mongoose')
 const ArticleRouter=require('./router/index')
+const Article=require('./models/blog.model')
 const morgan=require('morgan')
-
+const methodOverride = require('method-override')
 app.set('view engine','ejs')
 
 
 app.use(express.urlencoded({extended:false}))
-
+app.use(methodOverride('_method'))
 
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('tiny'))
@@ -19,13 +20,9 @@ app.use((req,res,next)=>{
 
 app.use('/articles',ArticleRouter)
 //Home Page
-app.get('/', (req,res) => {
-  const blogs = [     
-    {title: 'Mia can lift ',createdAt:new Date(), snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    {title: 'Wala nang roads',createdAt:new Date(), snippet: 'Lorem ipsum dolor sit amet consectetur'},
-    {title: 'Jonnie Confession',createdAt:new Date(), snippet: 'Lorem ipsum dolor sit amet consectetur'},
-];
-  res.render('articles/index', {title: "Home", blogs})
+app.get('/', async (req,res) => {
+  const articles= await Article.find().sort({createdAt:'desc'})
+  res.render('articles/index', {articles:articles})
 })
 
 //About Page
@@ -39,10 +36,9 @@ app.get('/about-us', (req,res) => {
 })
 
 //Page not FOUND
-app.use('/',(req,res) => {
-  res.status(404).render('404', {title: "404"})
-})
-
+app.use((req, res) => {
+  res.status(404).render('404', { title: "404" });
+});
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
