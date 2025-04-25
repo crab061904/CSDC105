@@ -105,7 +105,7 @@ nav{
 .Container .boxes{
     background-color: #8080FF;
     color: white;
-    width: 90%;
+    width: 100%;
    padding: 3%;
    padding-bottom: 5%;
    margin-bottom: 1%;
@@ -128,7 +128,6 @@ nav{
 .content{
         margin: 4%;
         padding: 3%;
-        
         font-size:1.4rem ;
 }
 .title-about{
@@ -197,4 +196,33 @@ input{
 }
 button:hover{
     color:white;
+}
+#block{
+    width: 100%;
+   display:  inline-block;
+padding-bottom: 5%;
+   
+}
+.Containerrot{
+    width:50vw;
+    display:block;
+    width: 50%;
+    margin-left: 25%;
+
+}
+.Containerrot .title-page h1{
+    font-size: 5.5rem;
+    color:#5f5fe6;
+  font-weight: bold;
+  margin-bottom: 1%;
+  text-align: left;
+}
+.drop{
+    font-size:1.4rem ;
+    margin-top:2%;
+        padding: 1%;
+}
+.brainrot{
+   
+   height: 50vh;
 }

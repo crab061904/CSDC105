@@ -1,20 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Css/home.css"> <!-- Your existing home.css -->
+    <title>ImmaCRAB's Blog - Show Article</title>
 </head>
+
 <body>
-    <h1 class="mb-1"><%=article.title%></h1>
-    <div class="text-muted mb2"><%= article.createdAt.toLocaleDateString() %></div>
-    <a href="/" class="btn btn-secondary">All Articles</a>
-    <a href="/articles/edit/<%=article.id%>" class="btn btn-info">edit</a>
-  <div>
-    <%- article.sanitizedHtml%>
-  </div>
-  
+
+    <!-- Navbar -->
+    <nav>
+        <div class="site-title">
+            <a href="/"> <h1>ImmaCRAB’s BLOG</h1> </a>
+        </div>
+        <div>
+            <ul class="nav">
+                <li><a href="/"> Blogs </a></li>
+                <li><a href="/about"> About </a></li>
+                <li id="new">
+                    <a href="/articles/create">
+                        <div class="box">+</div>
+                        <div class="label">Create New</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Article Show Page -->
+    <div class="Containerrot mt-5">
+        <div class="title-page" >
+            <h1><%= article.title %></h1>
+        </div>
+        <div id="block">
+     
+            <a href="/" class="btn btn-secondary" style="margin:0%;">All Articles</a>
+            <a href="/articles/edit/<%= article._id %>" class="btn btn-info" style="margin:0%;">Edit</a>
+        
+          </div>
+
+        <!-- Display Image if Available -->
+        <% if (article.image) { %>
+        <div class="article-image">
+            <img src="data:image/jpeg;base64,<%= article.image.toString('base64') %>" alt="Article Image" class="brainrot img-fluid rounded" />
+            
+        </div>
+        <% } %>
+        <div class="text-muted mb-3">
+          <small><%= article.createdAt.toLocaleDateString() %></small>
+        </div>
+      
+        <!-- Article Content -->
+        <div class="drop">
+            <%- article.sanitizedHtml %> 
+        </div>
+    </div>
 
 </body>
+
 </html>

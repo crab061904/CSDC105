@@ -1,51 +1,49 @@
-const mongoose=require('mongoose');
-const { marked } = require('marked')
-const slugify=require('slugify')
-const createDomPurify=require('dompurify')
-const {JSDOM}=require('jsdom')
-const dompurify=createDomPurify(new JSDOM().window)
-const blogSchema= new mongoose.Schema(
-    {
-        title:{
-            type:String,
-            required:true,
-        },
-        description:{
-            type:String,
-            
-        },
-        markdown:{
-            type:String,
-            required:true,
-        },
-        createdAt:{
-            type:Date,
-            default:Date.now
-        },
-        slug:{
-            type:String,
-            required:true,
-            unique:true
-        },
-        sanitizedHtml:{
-            type:String,
-            required:true
-        }
+const mongoose = require('mongoose');
+const slugify = require('slugify');
+
+const blogSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
     },
-    {
-        timestamps:false,
-        versionKey: false
-    }
+    description: {
+      type: String,
+    },
+    markdown: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    sanitizedHtml: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: Buffer,  // Store image as Binary Data (Buffer)
+    },
+  },
+  {
+    timestamps: false,
+    versionKey: false,
+  }
 );
 
-blogSchema.pre('validate',function(next){
-    if(this.title){
-        this.slug=slugify(this.title,{lower:true,strict:true})
-    }
-    if(this.markdown){
-        this.sanitizedHtml=dompurify.sanitize(marked(this.markdown))
-    }
-    next()
-})
-const Blog=mongoose.model("Blog",blogSchema);
-module.exports=Blog;
+// Pre-save hook to generate slug and sanitize markdown
+blogSchema.pre('validate', function (next) {
+  if (this.title) {
+    this.slug = slugify(this.title, { lower: true, strict: true });
+  }
+  next();
+});
+
+const blog = mongoose.model('blogs', blogSchema);
+module.exports = blog;
