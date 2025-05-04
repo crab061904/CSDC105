@@ -54,8 +54,9 @@ export const UserController = {
  // Create a new user
  createUser: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { username, email, password, role, avatar, bio } = req.body;
-    if (!username || !email || !password) {
+    const { firstName, lastName, username, email, password, role, avatar, bio, backgroundImage } = req.body;
+    
+    if (!firstName || !lastName || !username || !email || !password) {
       res.status(400).json({ success: false, error: 'Missing required fields' });
       return;
     }
@@ -68,7 +69,7 @@ export const UserController = {
 
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
-    const userData = { username, email, password: hashedPassword, role, avatar, bio };
+    const userData = { firstName, lastName, username, email, password: hashedPassword, role, avatar, bio, backgroundImage };
 
     const newUser = await createUser(userData);
     if (!newUser) {
@@ -82,6 +83,7 @@ export const UserController = {
     next(error);
   }
 },
+
 
   // Delete user by ID
   deleteUser: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
@@ -104,25 +106,26 @@ export const UserController = {
     try {
       const { id } = req.params;
       const updatedData = req.body;
-
+  
       // Check if password is being updated, and if so, hash it
       if (updatedData.password) {
         const salt = bcrypt.genSaltSync(10);
         updatedData.password = bcrypt.hashSync(updatedData.password, salt);
       }
-
+  
       const updatedUser = await updateUserById(id, updatedData);  // Update user by ID
       if (!updatedUser) {
         res.status(404).json({ success: false, error: 'User not found.' });
         return;
       }
-
+  
       res.status(200).json({ success: true, data: updatedUser });
     } catch (error) {
       console.error(error);
       next(error);
     }
   },
+  
 
   // Login user (for JWT token generation)
   loginUser: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
