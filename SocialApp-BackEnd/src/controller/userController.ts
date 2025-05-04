@@ -128,39 +128,39 @@ export const UserController = {
   loginUser: async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { email, password } = req.body;
-
+  
       // Check if the email and password are provided
       if (!email || !password) {
         res.status(400).json({ success: false, error: 'Email and password are required' });
         return;
       }
-
+  
       // Fetch the user by email
       const user = await getUserByEmail(email);
       if (!user) {
         res.status(401).json({ success: false, error: 'Invalid email or password' });
         return;
       }
-
+  
       // Typecast the user to IUser to ensure proper type checking
       const typedUser = user as IUser;
-
-      // Make sure the user object has _id before accessing it
-      if (!typedUser._id) {
+  
+      // Check if the user has a password
+      if (!typedUser.password) {
         res.status(401).json({ success: false, error: 'Invalid email or password' });
         return;
       }
-
+  
       // Compare the provided password with the stored hashed password
       const isPasswordValid = await bcrypt.compare(password, typedUser.password);
       if (!isPasswordValid) {
         res.status(401).json({ success: false, error: 'Invalid email or password' });
         return;
       }
-
+  
       // Generate JWT token
       const token = generateToken(typedUser._id.toString(), typedUser.role);  // Now we can safely access _id
-
+  
       // Return the token in the response
       res.status(200).json({
         success: true,
@@ -172,4 +172,5 @@ export const UserController = {
       next(error);
     }
   },
+  
 };

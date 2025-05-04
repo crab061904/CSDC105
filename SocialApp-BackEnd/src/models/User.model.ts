@@ -1,10 +1,10 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
-// Export the IUser interface
 export interface IUser extends Document {
+  _id: string;
   username: string;
   email: string;
-  password: string;
+  password?: string; // Optional password for OAuth users
   role: string;
   avatar: string;
   bio: string;
@@ -24,7 +24,7 @@ const UserSchema = new Schema<IUser>({
   },
   password: {
     type: String,
-    required: true,
+    required: false, // Optional for OAuth users
   },
   avatar: {
     type: String,
@@ -45,5 +45,4 @@ const UserSchema = new Schema<IUser>({
   },
 });
 
-// Export the model
 export const UserModel = mongoose.model<IUser>('User', UserSchema);
